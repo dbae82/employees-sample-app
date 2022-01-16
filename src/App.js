@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react'
-
 import { makeServer } from "./server";
 
 if (process.env.NODE_ENV === "development") {
@@ -7,15 +5,17 @@ if (process.env.NODE_ENV === "development") {
 }
 
 function App() {
-  let [employees, setEmployees] = useState([])
 
-  console.log(employees);
+  // Initial fetch test get request before creating employee and container components
+  // let [employees, setEmployees] = useState([])
 
-  useEffect(() => {
-    fetch('api/employees')
-      .then(res => res.json())
-      .then(json => setEmployees(json.employees))
-  }, [])
+  // console.log(employees);
+
+  // useEffect(() => {
+  //   fetch('api/employees')
+  //     .then(res => res.json())
+  //     .then(json => setEmployees(json.employees))
+  // }, [])
 
   return (
     <div>
