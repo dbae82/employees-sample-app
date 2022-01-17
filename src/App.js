@@ -1,12 +1,12 @@
 // import React, { useState, useEffect } from "react";
 
-import { makeServer } from "./server";
+// import { makeServer } from "./server";
 
 import EmployeeContainer from "./components/EmployeeContainer/EmployeeContainer";
 
-if (process.env.NODE_ENV === "development") {
-  makeServer({ environment: "development" });
-}
+// if (process.env.NODE_ENV === "development") {
+//   makeServer({ environment: "development" });
+// }
 
 function App() {
 

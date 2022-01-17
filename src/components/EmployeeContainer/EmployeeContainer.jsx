@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "development") {
 const EmployeeContainer = () => {
   const [data, setData] = useState([]);
 
-  console.log(data);
+//   console.log(data);
 
   useEffect(() => {
     fetch("api/employees")
