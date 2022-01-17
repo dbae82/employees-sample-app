@@ -28,6 +28,9 @@ const EmployeeCard = (props) => {
           <p>Bio: {props.data.bio}</p>
         </>
       )}
+      <button onClick={() => setExpand(!expand)}>
+        {!expand ? "Expand" : "Collapse"}
+      </button>
     </div>
   );
 };
