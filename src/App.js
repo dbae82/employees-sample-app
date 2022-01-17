@@ -1,5 +1,7 @@
 import { makeServer } from "./server";
 
+import EmployeeContainer from "./components/EmployeeContainer/EmployeeContainer";
+
 if (process.env.NODE_ENV === "development") {
   makeServer({ environment: "development" });
 }
@@ -21,6 +23,7 @@ function App() {
     <div>
       <header>
         <h1>Employees</h1>
+        <EmployeeContainer />
       </header>
     </div>
   );
