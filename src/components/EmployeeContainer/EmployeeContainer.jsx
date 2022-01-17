@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === "development") {
 
 const EmployeeContainer = () => {
   const [data, setData] = useState([]);
+  const [expandAll, setExpandAll] = useState(false)
 
 //   console.log(data);
 
@@ -21,7 +22,10 @@ const EmployeeContainer = () => {
 
   return (
     <div>
-      <Employee data={data} />
+      <button onClick={() => setExpandAll(!expandAll)}>
+        {!expandAll ? "Expand All" : "Collapse All"}
+      </button>
+      <Employee data={data} expandAll={expandAll} />
     </div>
   );
 };

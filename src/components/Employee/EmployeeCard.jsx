@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const EmployeeCard = (props) => {
   const [expand, setExpand] = useState(false);
+
+  useEffect(() => {
+    if (props.expandAll === true) {
+      setExpand(true);
+    } else {
+      setExpand(false);
+    }
+  }, [props.expandAll]);
 
   return (
     <div>
