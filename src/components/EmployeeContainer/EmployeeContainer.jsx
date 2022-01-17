@@ -21,11 +21,7 @@ const EmployeeContainer = () => {
 
   return (
     <div>
-      {data ? (
-        <Employee data={data} />
-      ) : (
-        <p>loading</p>
-      )}
+      <Employee data={data} />
     </div>
   );
 };
