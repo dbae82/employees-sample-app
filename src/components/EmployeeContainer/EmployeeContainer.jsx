@@ -15,7 +15,7 @@ const EmployeeContainer = () => {
   const deleteEmployee = async (id) => {
     try {
       await fetch(`/api/employees/${id}`, { method: "DELETE" });
-      console.log('click');
+      setData(data.filter(employee => employee.id !== id))
     } catch (error) {}
   };
 
