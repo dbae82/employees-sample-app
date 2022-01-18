@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const EmployeeCard = (props) => {
   const [expand, setExpand] = useState(false);
+  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     if (props.expandAll === true) {
@@ -27,6 +28,9 @@ const EmployeeCard = (props) => {
         <></>
       ) : (
         <>
+          <button onClick={() => setUpdate(!update)}>
+            {!update ? "Update" : "Cancel"}
+          </button>
           <address>
             Address: {props.data.address.streetAddress},{" "}
             {props.data.address.city}, {props.data.address.state}{" "}

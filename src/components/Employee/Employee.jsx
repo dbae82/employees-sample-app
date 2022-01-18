@@ -9,6 +9,7 @@ const Employee = (props) => {
         key={employee.id}
         data={employee}
         expandAll={props.expandAll}
+        updateEmployee={props.updateEmployee}
         deleteEmployee={props.deleteEmployee}
       />
     ));

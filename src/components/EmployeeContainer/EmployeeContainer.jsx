@@ -12,10 +12,22 @@ const EmployeeContainer = () => {
   const [data, setData] = useState([]);
   const [expandAll, setExpandAll] = useState(false);
 
+  const updateEmployee = async (id, firstName, lastName) => {
+    try {
+      await fetch(`/api/employees/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+        }),
+      });
+    } catch (error) {}
+  };
+
   const deleteEmployee = async (id) => {
     try {
       await fetch(`/api/employees/${id}`, { method: "DELETE" });
-      setData(data.filter(employee => employee.id !== id))
+      setData(data.filter((employee) => employee.id !== id));
     } catch (error) {}
   };
 
@@ -33,6 +45,7 @@ const EmployeeContainer = () => {
       <Employee
         data={data}
         expandAll={expandAll}
+        updateEmployee={updateEmployee}
         deleteEmployee={deleteEmployee}
       />
     </div>
