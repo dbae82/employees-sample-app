@@ -39,6 +39,9 @@ const EmployeeCard = (props) => {
       <button onClick={() => setExpand(!expand)}>
         {!expand ? "Expand" : "Collapse"}
       </button>
+      <button onClick={() => props.deleteEmployee(props.data.id)}>
+        Delete
+      </button>
     </div>
   );
 };

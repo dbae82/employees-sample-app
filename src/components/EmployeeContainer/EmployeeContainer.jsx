@@ -10,9 +10,14 @@ if (process.env.NODE_ENV === "development") {
 
 const EmployeeContainer = () => {
   const [data, setData] = useState([]);
-  const [expandAll, setExpandAll] = useState(false)
+  const [expandAll, setExpandAll] = useState(false);
 
-//   console.log(data);
+  const deleteEmployee = async (id) => {
+    try {
+      await fetch(`/api/employees/${id}`, { method: "DELETE" });
+      console.log('click');
+    } catch (error) {}
+  };
 
   useEffect(() => {
     fetch("api/employees")
@@ -25,7 +30,11 @@ const EmployeeContainer = () => {
       <button onClick={() => setExpandAll(!expandAll)}>
         {!expandAll ? "Expand All" : "Collapse All"}
       </button>
-      <Employee data={data} expandAll={expandAll} />
+      <Employee
+        data={data}
+        expandAll={expandAll}
+        deleteEmployee={deleteEmployee}
+      />
     </div>
   );
 };

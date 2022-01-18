@@ -1,17 +1,20 @@
-import React from 'react'
+import React from "react";
 
-import EmployeeCard from './EmployeeCard'
+import EmployeeCard from "./EmployeeCard";
 
 const Employee = (props) => {
-    const generateEmployees = () => {
-        return props.data.map((employee) => <EmployeeCard key={employee.id} data={employee} expandAll={props.expandAll} />)
-    }
+  const generateEmployees = () => {
+    return props.data.map((employee) => (
+      <EmployeeCard
+        key={employee.id}
+        data={employee}
+        expandAll={props.expandAll}
+        deleteEmployee={props.deleteEmployee}
+      />
+    ));
+  };
 
-    return (
-        <div>
-            {generateEmployees()}
-        </div>
-    )
-}
+  return <div>{generateEmployees()}</div>;
+};
 
-export default Employee
+export default Employee;
