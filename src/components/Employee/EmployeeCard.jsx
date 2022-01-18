@@ -3,6 +3,21 @@ import React, { useState, useEffect } from "react";
 const EmployeeCard = (props) => {
   const [expand, setExpand] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [inputs, setInputs] = useState({ firstName: "", lastName: "" });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { firstName, lastName } = inputs;
+    props.updateEmployee(props.data.id, firstName, lastName);
+    setUpdate(false);
+  };
+
+  const handleChange = (event) => {
+    setInputs((inputs) => ({
+      ...inputs,
+      [event.target.name]: event.target.value,
+    }));
+  };
 
   useEffect(() => {
     if (props.expandAll === true) {
@@ -34,9 +49,21 @@ const EmployeeCard = (props) => {
           {!update ? (
             <></>
           ) : (
-            <form>
-              <input type="text" placeholder="First Name" name="firstName" />
-              <input type="text" placeholder="Last Name" name="lastName" />
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="First Name"
+                value={inputs.firstName}
+                onChange={handleChange}
+                name="firstName"
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={inputs.lastName}
+                onChange={handleChange}
+                name="lastName"
+              />
               <button type="submit">Update</button>
             </form>
           )}

@@ -21,6 +21,9 @@ const EmployeeContainer = () => {
           lastName: lastName,
         }),
       });
+      await fetch("api/employees")
+      .then((res) => res.json())
+      .then((json) => setData(json.employees));
     } catch (error) {}
   };
 
