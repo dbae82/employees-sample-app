@@ -12,6 +12,12 @@ const EmployeeContainer = () => {
   const [data, setData] = useState([]);
   const [expandAll, setExpandAll] = useState(false);
 
+  const getEmployees = () => {
+    fetch("api/employees")
+    .then((res) => res.json())
+    .then((json) => setData(json.employees));
+  }
+
   const updateEmployee = async (id, firstName, lastName) => {
     try {
       await fetch(`/api/employees/${id}`, {
@@ -21,23 +27,19 @@ const EmployeeContainer = () => {
           lastName: lastName,
         }),
       });
-      await fetch("api/employees")
-      .then((res) => res.json())
-      .then((json) => setData(json.employees));
+      await getEmployees()
     } catch (error) {}
   };
 
   const deleteEmployee = async (id) => {
     try {
       await fetch(`/api/employees/${id}`, { method: "DELETE" });
-      setData(data.filter((employee) => employee.id !== id));
+      await getEmployees()
     } catch (error) {}
   };
 
   useEffect(() => {
-    fetch("api/employees")
-      .then((res) => res.json())
-      .then((json) => setData(json.employees));
+    getEmployees()
   }, []);
 
   return (
