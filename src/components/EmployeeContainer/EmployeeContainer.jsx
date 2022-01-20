@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const EmployeeContainer = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [expandAll, setExpandAll] = useState(false);
 
@@ -17,6 +18,7 @@ const EmployeeContainer = () => {
       await fetch("api/employees")
         .then((res) => res.json())
         .then((json) => setData(json.employees));
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,15 +54,21 @@ const EmployeeContainer = () => {
 
   return (
     <div>
-      <button onClick={() => setExpandAll(!expandAll)}>
-        {!expandAll ? "Expand All" : "Collapse All"}
-      </button>
-      <Employee
-        data={data}
-        expandAll={expandAll}
-        updateEmployee={updateEmployee}
-        deleteEmployee={deleteEmployee}
-      />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <button onClick={() => setExpandAll(!expandAll)}>
+            {!expandAll ? "Expand All" : "Collapse All"}
+          </button>
+          <Employee
+            data={data}
+            expandAll={expandAll}
+            updateEmployee={updateEmployee}
+            deleteEmployee={deleteEmployee}
+          />
+        </>
+      )}
     </div>
   );
 };
