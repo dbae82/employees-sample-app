@@ -12,6 +12,7 @@ const EmployeeContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [expandAll, setExpandAll] = useState(false);
+  const [error, setError] = useState(null);
 
   const getEmployees = async () => {
     try {
@@ -19,8 +20,8 @@ const EmployeeContainer = () => {
         .then((res) => res.json())
         .then((json) => setData(json.employees));
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -34,8 +35,8 @@ const EmployeeContainer = () => {
         }),
       });
       await getEmployees();
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -43,8 +44,8 @@ const EmployeeContainer = () => {
     try {
       await fetch(`/api/employees/${id}`, { method: "DELETE" });
       await getEmployees();
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -58,15 +59,21 @@ const EmployeeContainer = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <button onClick={() => setExpandAll(!expandAll)}>
-            {!expandAll ? "Expand All" : "Collapse All"}
-          </button>
-          <Employee
-            data={data}
-            expandAll={expandAll}
-            updateEmployee={updateEmployee}
-            deleteEmployee={deleteEmployee}
-          />
+          {!error ? (
+            <>
+              <button onClick={() => setExpandAll(!expandAll)}>
+                {!expandAll ? "Expand All" : "Collapse All"}
+              </button>
+              <Employee
+                data={data}
+                expandAll={expandAll}
+                updateEmployee={updateEmployee}
+                deleteEmployee={deleteEmployee}
+              />
+            </>
+          ) : (
+            <p>Something went wrong. Please try again.</p>
+          )}
         </>
       )}
     </div>
