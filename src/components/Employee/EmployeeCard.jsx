@@ -76,7 +76,7 @@ const EmployeeCard = (props) => {
           <p>Bio: {props.data.bio}</p>
         </>
       )}
-      <button onClick={() => setExpand(!expand)}>
+      <button onClick={() => setExpand(!expand)} data-testid='expand-btn'>
         {!expand ? "Expand" : "Collapse"}
       </button>
       <button onClick={() => props.deleteEmployee(props.data.id)}>
