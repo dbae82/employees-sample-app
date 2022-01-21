@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Employee from "../Employee/Employee";
+import EmployeeCard from '../EmployeeCard/EmployeeCard';
 
 import { makeServer } from "../../server";
 
@@ -13,6 +13,18 @@ const EmployeeContainer = () => {
   const [data, setData] = useState([]);
   const [expandAll, setExpandAll] = useState(false);
   const [error, setError] = useState(null);
+
+  const generateEmployees = () => {
+    return data.map((employee) => (
+      <EmployeeCard
+        key={employee.id}
+        data={employee}
+        expandAll={expandAll}
+        updateEmployee={updateEmployee}
+        deleteEmployee={deleteEmployee}
+      />
+    ));
+  };
 
   const getEmployees = async () => {
     try {
@@ -64,12 +76,7 @@ const EmployeeContainer = () => {
               <button onClick={() => setExpandAll(!expandAll)}>
                 {!expandAll ? "Expand All" : "Collapse All"}
               </button>
-              <Employee
-                data={data}
-                expandAll={expandAll}
-                updateEmployee={updateEmployee}
-                deleteEmployee={deleteEmployee}
-              />
+              {generateEmployees()}
             </>
           ) : (
             <p>Something went wrong. Please try again.</p>
